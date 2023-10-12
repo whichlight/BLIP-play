@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>File Upload</title>
+    <title>Image Ask AI</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -10,6 +10,15 @@
   </head>
   <body>
     <h1>Upload your image and ask a question about it</h1>
+    <p>
+      This uses
+      <a
+        href="https://blog.salesforceairesearch.com/blip-bootstrapping-language-image-pretraining/"
+        target="_blank"
+        >BLIP</a
+      >
+      to reason about an image
+    </p>
 
     <form
       id="upload-form"
@@ -24,7 +33,6 @@
         class="inputfile"
         accept="image/*"
       />
-      <label for="file" class="button label-file">Choose file</label>
       <input type="submit" class="button" value="Upload" />
     </form>
 
@@ -32,7 +40,6 @@
     <div class="img-box">
       <img src="{{ url_for('static', filename='images/'+filename) }}" />
     </div>
-    {% endif %}
 
     <form action="/submit" method="post">
       <input type="text" name="question" placeholder="Enter question" />
@@ -42,10 +49,10 @@
     {% if chat %}
     <div class="chat-log">
       {% for entry in chat %}
-      <p>You: {{ entry.question }}</p>
+      <p>Question: {{ entry.question }}</p>
       <p>{{ entry.answer }}</p>
       {% endfor %}
     </div>
-    {% endif %}
+    {% endif %} {% endif %}
   </body>
 </html>
