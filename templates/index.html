@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Upload</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Upload your image and ask a question about it</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input
+        type="file"
+        name="file"
+        id="file"
+        class="inputfile"
+        accept="image/*"
+      />
+      <label for="file" class="button label-file">Choose file</label>
+      <input type="submit" class="button" value="Upload" />
+    </form>
+
+    <form action="/submit" method="post">
+      <input type="text" name="question" placeholder="Enter question" />
+      <input type="submit" class="button" value="Submit" />
+    </form>
+
+    {% if output %}
+    <p>{{ output }}</p>
+    {% endif %} {% if filename %}
+    <div class="img-box">
+      <img src="{{ url_for('static', filename='images/'+filename) }}" />
+    </div>
+    {% endif %}
+  </body>
+</html>
