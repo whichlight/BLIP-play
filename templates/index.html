@@ -11,7 +11,12 @@
   <body>
     <h1>Upload your image and ask a question about it</h1>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form
+      id="upload-form"
+      action="/upload"
+      method="post"
+      enctype="multipart/form-data"
+    >
       <input
         type="file"
         name="file"
@@ -23,16 +28,23 @@
       <input type="submit" class="button" value="Upload" />
     </form>
 
+    {% if filename %}
+    <div class="img-box">
+      <img src="{{ url_for('static', filename='images/'+filename) }}" />
+    </div>
+    {% endif %}
+
     <form action="/submit" method="post">
       <input type="text" name="question" placeholder="Enter question" />
       <input type="submit" class="button" value="Submit" />
     </form>
 
-    {% if output %}
-    <p>{{ output }}</p>
-    {% endif %} {% if filename %}
-    <div class="img-box">
-      <img src="{{ url_for('static', filename='images/'+filename) }}" />
+    {% if chat %}
+    <div class="chat-log">
+      {% for entry in chat %}
+      <p>You: {{ entry.question }}</p>
+      <p>{{ entry.answer }}</p>
+      {% endfor %}
     </div>
     {% endif %}
   </body>

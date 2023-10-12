@@ -60,3 +60,7 @@ input[type="submit"],
   max-width: 100%;
   max-height: 400px;
 }
+
+.chat-log p {
+  color: grey;
+}
