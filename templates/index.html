@@ -10,49 +10,59 @@
   </head>
   <body>
     <h1>Upload your image and ask a question about it</h1>
-    <p>
-      This uses
-      <a
-        href="https://blog.salesforceairesearch.com/blip-bootstrapping-language-image-pretraining/"
-        target="_blank"
-        >BLIP</a
-      >
-      to reason about an image
-    </p>
-
-    <form
-      id="upload-form"
-      action="/upload"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input
-        type="file"
-        name="file"
-        id="file"
-        class="inputfile"
-        accept="image/*"
-      />
-      <input type="submit" class="button" value="Upload" />
-    </form>
-
-    {% if filename %}
-    <div class="img-box">
-      <img src="{{ url_for('static', filename='images/'+filename) }}" />
+    <div class="info">
+      <p>
+        This uses
+        <a
+          href="https://blog.salesforceairesearch.com/blip-bootstrapping-language-image-pretraining/"
+          target="_blank"
+          >BLIP</a
+        >
+        to reason about an image
+      </p>
     </div>
+    <div class="flex-container">
+      <div>
+        <form
+          id="upload-form"
+          action="/upload"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="file"
+            name="file"
+            id="file"
+            class="inputfile"
+            accept="image/*"
+          />
+          <input type="submit" class="button" value="Upload" />
 
-    <form action="/submit" method="post">
-      <input type="text" name="question" placeholder="Enter question" />
-      <input type="submit" class="button" value="Submit" />
-    </form>
+          {% if filename %}
+          <div class="img-box">
+            <img src="{{ url_for('static', filename='images/'+filename) }}" />
+          </div>
+          {% endif %}
+        </form>
+      </div>
 
-    {% if chat %}
-    <div class="chat-log">
-      {% for entry in chat %}
-      <p>Question: {{ entry.question }}</p>
-      <p>{{ entry.answer }}</p>
-      {% endfor %}
+      {% if filename %}
+      <div class="question-chat">
+        <form action="/submit" method="post">
+          <input type="text" name="question" placeholder="Enter question" />
+          <input type="submit" class="button" value="Submit" />
+        </form>
+
+        {% if chat %}
+        <div class="chat-log">
+          {% for entry in chat %}
+          <p>Question: {{ entry.question }}</p>
+          <p>{{ entry.answer }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endif %} {% endif %}
     </div>
-    {% endif %} {% endif %}
   </body>
 </html>

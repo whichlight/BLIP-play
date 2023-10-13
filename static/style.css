@@ -17,6 +17,13 @@ form {
   margin-bottom: 20px;
 }
 
+.chat-log {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
 input[type="text"] {
   width: 50%;
 }
@@ -28,9 +35,24 @@ input[type="text"] {
   display: inline-block;
 }
 
+.info p {
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-container > div {
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .img-box {
   text-align: center;
-  padding: 10px;
+  margin-top: 10px;
 }
 
 .img-box img {
@@ -40,4 +62,5 @@ input[type="text"] {
 
 .chat-log p {
   color: grey;
+  margin: 0px;
 }
