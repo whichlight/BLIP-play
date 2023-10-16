@@ -2,11 +2,18 @@ from flask import Flask, request, render_template, session
 from werkzeug.utils import secure_filename
 from flask_session import Session
 import replicate
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'  # replace 'secret' with a real secret key
+
+app.config['SECRET_KEY'] = os.getenv("FLASK_SECRET_KEY")
 app.config['SESSION_TYPE'] = 'filesystem'
+os.environ["REPLICATE_API_TOKEN"] = os.getenv("REPLICATE_API_TOKEN")
+
 Session(app)
 
 @app.route('/')
